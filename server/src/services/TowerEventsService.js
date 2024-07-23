@@ -1,9 +1,12 @@
+import { dbContext } from "../db/DbContext"
 
 
 class TowerEventsService {
 
-  createTowerEvent(towerEventData) {
-
+  async createTowerEvent(towerEventData) {
+    const towerEvent = await dbContext.TowerEvents.create(towerEventData)
+    await towerEvent.populate('creator', '-email')
+    return towerEvent
   }
 }
 

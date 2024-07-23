@@ -1,0 +1,37 @@
+{
+  "folders": [
+    {
+      "name": "client",
+      "path": "client"
+    },
+    {
+      "name": "server",
+      "path": "server"
+    }
+  ],
+  "settings": {
+    "workbench.colorCustomizations": {
+      "commandCenter.border": "#15202b99",
+      "editorGroup.border": "#d3c380",
+      "panel.border": "#d3c380",
+      "sash.hoverBorder": "#d3c380",
+      "sideBar.border": "#d3c380",
+      "statusBar.background": "#c6b15a",
+      "statusBar.border": "#c6b15a",
+      "statusBar.debuggingBackground": "#5a6fc6",
+      "statusBar.debuggingBorder": "#5a6fc6",
+      "statusBar.debuggingForeground": "#e7e7e7",
+      "statusBar.foreground": "#15202b",
+      "statusBarItem.hoverBackground": "#b09a3d",
+      "statusBarItem.remoteBackground": "#c6b15a",
+      "statusBarItem.remoteForeground": "#15202b",
+      "tab.activeBorder": "#d3c380",
+      "titleBar.activeBackground": "#c6b15a",
+      "titleBar.activeForeground": "#15202b",
+      "titleBar.border": "#c6b15a",
+      "titleBar.inactiveBackground": "#c6b15a99",
+      "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#c6b15a"
+  }
+}

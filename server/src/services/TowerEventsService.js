@@ -20,9 +20,20 @@ class TowerEventsService {
     return towerEvent
   }
 
-  async editTowerEvent(towerEventId, userId) {
-    const towerEventToEdit = await dbContext.TowerEvents.findById(towerEventId)
-    if (towerEventToEdit.id != userId) throw new Forbidden(`You cannot edit an event you did not create`)
+  async editTowerEvent(towerEventData, userId) {
+    const towerEventToEdit = await dbContext.TowerEvents.findById(towerEventData.id)
+    if (towerEventToEdit.creatorId != userId) throw new Forbidden(`You cannot edit an event you did not create`)
+    towerEventToEdit.creatorId = towerEventToEdit.creatorId
+    towerEventToEdit.name = towerEventData.name || towerEventToEdit.name
+    towerEventToEdit.description = towerEventData.description || towerEventToEdit.description
+    towerEventToEdit.coverImg = towerEventData.coverImg || towerEventToEdit.coverImg
+    towerEventToEdit.location = towerEventData.location || towerEventToEdit.location
+    towerEventToEdit.capacity = towerEventData.capacity || towerEventToEdit.capacity
+    towerEventToEdit.startDate = towerEventData.startData || towerEventToEdit.startDate
+    towerEventToEdit.isCanceled = towerEventToEdit.isCanceled
+    towerEventToEdit.type = towerEventData.type || towerEventToEdit.type
+    await towerEventToEdit.save()
+    return `${towerEventToEdit.name} has been changed`
   }
 }
 

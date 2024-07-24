@@ -12,7 +12,7 @@ defineProps({ towerEvent: TowerEvent })
 <template>
   <RouterLink :to="{ name: `Event Details`, params: { eventId: towerEvent.id } }">
     <div class="card bg-page mb-3">
-      <img class="img-fluid card-img-top" :src="towerEvent.coverImg" :alt="`${towerEvent.creator.name}'s event`">
+      <img class="img-fluid rounded" :src="towerEvent.coverImg" :alt="`${towerEvent.creator.name}'s event`">
       <div class="card-body ps-0">
         <p class="card-title fs-5 m-0">{{ towerEvent.name }}</p>
         <div class="d-flex flex-column justify-content-between">

@@ -4,6 +4,7 @@ import { AppState } from "../AppState";
 import Pop from "../utils/Pop";
 import { towerEventsService } from "../services/TowerEventsService";
 import TowerEventCard from "../components/TowerEventCard.vue";
+import { RouterLink } from "vue-router";
 
 const towerEvents = computed(() => AppState.towerEvents)
 
@@ -23,7 +24,7 @@ async function getTowerEvents() {
 <template>
   <section class="container-fluid">
     <div class="row">
-      <div v-for="towerEvent in towerEvents" :key="towerEvent.id" class="col-6">
+      <div v-for="towerEvent in towerEvents" :key="towerEvent.id" class="col-lg-6">
         <TowerEventCard :towerEvent="towerEvent" />
       </div>
     </div>

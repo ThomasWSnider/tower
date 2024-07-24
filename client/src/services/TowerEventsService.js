@@ -11,6 +11,11 @@ class TowerEventsService {
     const towerEvents = response.data.map(towerEvent => new TowerEvent(towerEvent))
     AppState.towerEvents = towerEvents
   }
+
+  async getTowerEventById(towerEventId) {
+    const response = await api.get(`api/events/${towerEventId}`)
+    logger.log(response.data)
+  }
 }
 
 export const towerEventsService = new TowerEventsService()

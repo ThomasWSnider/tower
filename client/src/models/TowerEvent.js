@@ -15,6 +15,10 @@ export class TowerEvent {
     this.creator = new Account(data.creator)
   }
 
+  get backgroundImg() {
+    return `url(${this.coverImg})`
+  }
+
   // TODO work on getting the getter to only slice on a space
   // get truncatedDescription() {
   //   const body = this.description

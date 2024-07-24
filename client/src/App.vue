@@ -20,5 +20,6 @@ import Navbar from './components/Navbar.vue'
 
 :root {
   --main-height: calc(100vh - 64px);
+  --gray-accent: rgba(128, 128, 128, 0.479)
 }
 </style>

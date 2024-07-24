@@ -35,6 +35,14 @@ class TowerEventsService {
     await towerEventToEdit.save()
     return `${towerEventToEdit.name} has been changed`
   }
+
+  async cancelTowerEvent(towerEventId, userId) {
+    const towerEventToCancel = await dbContext.TowerEvents.findById(towerEventId)
+    if (towerEventToCancel.creatorId != userId) throw new Forbidden('You may not delete an event you did not create')
+    towerEventToCancel.isCanceled = !towerEventToCancel.isCanceled
+    towerEventToCancel.save()
+    return `${towerEventToCancel} has been canceled`
+  }
 }
 
 export const towerEventsService = new TowerEventsService()

@@ -4,7 +4,8 @@ import { AppState } from "../AppState";
 import Pop from "../utils/Pop";
 import { towerEventsService } from "../services/TowerEventsService";
 import TowerEventCard from "../components/TowerEventCard.vue";
-import { RouterLink } from "vue-router";
+import ModalWrapper from "../components/ModalWrapper.vue";
+import TowerEventForm from "../components/TowerEventForm.vue";
 
 const towerEvents = computed(() => AppState.towerEvents)
 
@@ -68,13 +69,13 @@ async function getTowerEvents() {
                     <p class="card-text">
                       Create your own Tower Event and invite your friends or draw from a community of millions
                     </p>
-                    <p class="fw-bold text-end text-success" style="cursor: pointer;">Create an Event</p>
+                    <p data-bs-toggle="modal" data-bs-target="#exampleModal" class="fw-bold text-end event-button">
+                      Create an Event</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -83,6 +84,9 @@ async function getTowerEvents() {
       </div>
     </div>
   </section>
+  <ModalWrapper>
+    <TowerEventForm />
+  </ModalWrapper>
 </template>
 
 <style scoped lang="scss">
@@ -91,5 +95,16 @@ async function getTowerEvents() {
   width: 100vw;
   object-fit: cover;
   object-position: 50% 25%;
+}
+
+.event-button {
+  color: var(--bs-success);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.event-button:hover {
+  color: #076649 !important;
+  text-decoration: underline;
 }
 </style>

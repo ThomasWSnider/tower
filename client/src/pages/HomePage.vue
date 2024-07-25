@@ -49,7 +49,7 @@ async function getTowerEvents() {
           <div class="col-12">
             <h4 class="">How Tower Works</h4>
           </div>
-          <div class="col-md-4 my-3 me-5">
+          <div class="col-lg-4 col-md-6 my-3 me-lg-5">
             <div class="card px-2 pb-5">
               <div class="row">
                 <div class="col-2 text-center card-body">
@@ -65,7 +65,7 @@ async function getTowerEvents() {
               </div>
             </div>
           </div>
-          <div class="col-md-4 my-3 ms-5">
+          <div class="col-lg-4 col-md-6 my-3 ms-lg-5">
             <div class="card px-2">
               <div class="row">
                 <div class="col-2 text-center card-body">
@@ -92,7 +92,7 @@ async function getTowerEvents() {
       <div class="col-12">
         <h4 class=" mb-4">Explore Top Categories</h4>
         <div class="row mb-5">
-          <div v-for="eventType in eventTypes" :key="eventType" class="col">
+          <div v-for="eventType in eventTypes" :key="eventType" class="col-md-4 col-6 mb-2">
 
             <div @click="eventFilter = eventType" class="card event-filter-card">
               <div class="card-body">
@@ -108,7 +108,10 @@ async function getTowerEvents() {
 
 
     <div class="row">
-      <div v-for="towerEvent in towerEvents" :key="towerEvent.id" class="col-lg-4">
+      <div class="col-12 mb-4">
+        <h4>Upcoming Events</h4>
+      </div>
+      <div v-for="towerEvent in towerEvents" :key="towerEvent.id" class="col-lg-4 col-sm-6">
         <TowerEventCard :towerEvent="towerEvent" />
       </div>
     </div>

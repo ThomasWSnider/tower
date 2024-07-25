@@ -4,8 +4,9 @@ import { useRoute } from "vue-router";
 import { AppState } from "../AppState";
 import Pop from "../utils/Pop";
 import { towerEventsService } from "../services/TowerEventsService";
+import { Identity } from "@bcwdev/auth0provider-client";
 
-
+const account = computed(() => AppState.account)
 const towerEvent = computed(() => AppState.activeTowerEvent)
 const route = useRoute()
 
@@ -61,7 +62,7 @@ async function cancelTowerEvent() {
 
       <div class="col-8">
         <div class="row">
-          <div class="col-12 mt-2 text-end">
+          <div v-if="account?.id == towerEvent.creatorId" class="col-12 mt-2 text-end">
             <button class="btn edit-event-btn fs-4 py-0 px-2" data-bs-toggle="dropdown">
               <i class="mdi mdi-dots-horizontal"></i>
             </button>

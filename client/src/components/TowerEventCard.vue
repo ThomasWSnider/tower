@@ -11,16 +11,16 @@ defineProps({ towerEvent: TowerEvent })
 
 <template>
   <RouterLink :to="{ name: `Event Details`, params: { eventId: towerEvent.id } }">
-    <div class="card bg-page mb-3">
+    <div class="card bg-page mb-md-3 mb-2">
       <div class="position-relative">
         <img class="img-fluid rounded" :src="towerEvent.coverImg" :alt="`${towerEvent.creator.name}'s event`">
         <div class="canceled-tag position-absolute end-0 bottom-0">
           <p v-if="towerEvent.isCanceled" class="px-5 fs-2 fw-semibold m-0">Canceled</p>
         </div>
       </div>
-      <div class="card-body ps-0">
+      <div class="card-body ps-0 d-flex flex-column justify-content-between align-items-between">
         <p class="card-title fs-5 m-0">{{ towerEvent.name }}</p>
-        <div class="d-flex flex-column justify-content-between">
+        <div class="d-flex flex-column justify-content-between align-items-between">
           <p class="card-text">{{ towerEvent.description.length > 75 ? `${towerEvent.description.slice(0, 75)}...` :
             towerEvent.description }}</p>
           <p class="card-text">
@@ -43,7 +43,7 @@ img {
 }
 
 div.card {
-  height: 55vh;
+  height: 50vh;
   border: none;
 }
 

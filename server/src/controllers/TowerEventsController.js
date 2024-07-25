@@ -1,6 +1,7 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
 import { towerEventsService } from "../services/TowerEventsService";
 import BaseController from "../utils/BaseController";
+import { ticketsService } from "../services/TicketsService";
 
 
 export class TowerEventsController extends BaseController {
@@ -9,22 +10,11 @@ export class TowerEventsController extends BaseController {
     this.router
       .get('', this.getAllTowerEvents)
       .get('/:eventId', this.getTowerEventById)
+      .get('/:eventId/tickets', this.getTicketsByEventId)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createTowerEvent)
       .put('/:eventId', this.editTowerEvent)
       .delete('/:eventId', this.cancelTowerEvent)
-  }
-
-  async createTowerEvent(request, response, next) {
-    try {
-      const user = request.userInfo
-      const towerEventData = request.body
-      towerEventData.creatorId = user.id
-      const newTowerEvent = await towerEventsService.createTowerEvent(towerEventData)
-      response.send(newTowerEvent)
-    } catch (error) {
-      next(error)
-    }
   }
 
   async getAllTowerEvents(request, response, next) {
@@ -41,6 +31,28 @@ export class TowerEventsController extends BaseController {
       const towerEventId = request.params.eventId
       const towerEvent = await towerEventsService.getTowerEventById(towerEventId)
       response.send(towerEvent)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getTicketsByEventId(request, response, next) {
+    try {
+      const towerEventId = request.params.eventId
+      const towerEventTickets = await ticketsService.getTicketsByEventId(towerEventId)
+      response.send(towerEventTickets)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async createTowerEvent(request, response, next) {
+    try {
+      const user = request.userInfo
+      const towerEventData = request.body
+      towerEventData.creatorId = user.id
+      const newTowerEvent = await towerEventsService.createTowerEvent(towerEventData)
+      response.send(newTowerEvent)
     } catch (error) {
       next(error)
     }

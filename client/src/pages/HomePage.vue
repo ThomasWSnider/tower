@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { AppState } from "../AppState";
 import Pop from "../utils/Pop";
 import { towerEventsService } from "../services/TowerEventsService";
@@ -7,7 +7,14 @@ import TowerEventCard from "../components/TowerEventCard.vue";
 import ModalWrapper from "../components/ModalWrapper.vue";
 import TowerEventForm from "../components/TowerEventForm.vue";
 
-const towerEvents = computed(() => AppState.towerEvents)
+const eventFilter = ref('all')
+
+const towerEvents = computed(() => {
+  if (eventFilter.value == 'all') {
+    return AppState.towerEvents
+  }
+  return AppState.towerEvents.filter((towerEvent) => towerEvent.type == eventFilter.value)
+})
 
 const eventTypes = ['all', 'concert', 'convention', 'sport', 'digital', 'theatre']
 
@@ -72,7 +79,8 @@ async function getTowerEvents() {
                       Create your own Tower Event and invite your friends or draw from a community of millions
                     </p>
                     <p data-bs-toggle="modal" data-bs-target="#modal-wrapper" class="fw-bold text-end event-button">
-                      Create an Event</p>
+                      Create an Event
+                    </p>
                   </div>
                 </div>
               </div>
@@ -81,8 +89,19 @@ async function getTowerEvents() {
         </div>
       </div>
 
-      <div class="col-12 mb-4">
-        <h4>Explore Top Categories</h4>
+      <div class="col-12">
+        <h4 class=" mb-4">Explore Top Categories</h4>
+        <div class="row mb-5">
+          <div v-for="eventType in eventTypes" :key="eventType" class="col">
+
+            <div @click="eventFilter = eventType" class="card event-filter-card">
+              <div class="card-body">
+                <p class="card-title fs-3 text-capitalize text-center">{{ eventType }}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
 
     </div>
@@ -111,6 +130,10 @@ async function getTowerEvents() {
   color: var(--bs-success);
   cursor: pointer;
   transition: color 0.2s;
+}
+
+.event-filter-card {
+  cursor: pointer;
 }
 
 .event-button:hover {

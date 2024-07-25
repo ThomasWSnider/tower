@@ -9,6 +9,8 @@ import TowerEventForm from "../components/TowerEventForm.vue";
 
 const towerEvents = computed(() => AppState.towerEvents)
 
+const eventTypes = ['all', 'concert', 'convention', 'sport', 'digital', 'theatre']
+
 onMounted(() => {
   getTowerEvents()
 })
@@ -36,11 +38,11 @@ async function getTowerEvents() {
     <div class="row mt-5">
 
       <div class="col-12 mb-3">
-        <div class="row justify-content-around mb-5">
+        <div class="row justify-content-center mb-5">
           <div class="col-12">
             <h4 class="">How Tower Works</h4>
           </div>
-          <div class="col-md-4 my-3">
+          <div class="col-md-4 my-3 me-5">
             <div class="card px-2 pb-5">
               <div class="row">
                 <div class="col-2 text-center card-body">
@@ -56,7 +58,7 @@ async function getTowerEvents() {
               </div>
             </div>
           </div>
-          <div class="col-md-4 my-3">
+          <div class="col-md-4 my-3 ms-5">
             <div class="card px-2">
               <div class="row">
                 <div class="col-2 text-center card-body">
@@ -79,6 +81,14 @@ async function getTowerEvents() {
         </div>
       </div>
 
+      <div class="col-12 mb-4">
+        <h4>Explore Top Categories</h4>
+      </div>
+
+    </div>
+
+
+    <div class="row">
       <div v-for="towerEvent in towerEvents" :key="towerEvent.id" class="col-lg-4">
         <TowerEventCard :towerEvent="towerEvent" />
       </div>

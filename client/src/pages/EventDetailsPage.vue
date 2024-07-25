@@ -5,6 +5,7 @@ import { AppState } from "../AppState";
 import Pop from "../utils/Pop";
 import { towerEventsService } from "../services/TowerEventsService";
 import { Identity } from "@bcwdev/auth0provider-client";
+import { ticketsService } from "../services/TicketsService";
 
 const account = computed(() => AppState.account)
 const towerEvent = computed(() => AppState.activeTowerEvent)
@@ -41,6 +42,15 @@ async function cancelTowerEvent() {
     } else {
       Pop.success(`${towerEvent.value.name} is back on!`)
     }
+  } catch (error) {
+    Pop.error(error);
+  }
+}
+
+async function createTicket() {
+  try {
+    const accountId = account.value.id
+
   } catch (error) {
     Pop.error(error);
   }

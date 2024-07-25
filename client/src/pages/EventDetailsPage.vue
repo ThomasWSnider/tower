@@ -21,6 +21,29 @@ async function getTowerEventById() {
     Pop.error(error);
   }
 }
+
+async function cancelTowerEvent() {
+  try {
+    const confirm = await Pop.confirm(`Are you sure you want to cancel ${towerEvent.value.name}?`, `You may uncancel at any time, but there attendees may not get the news.`, `Yes, I'm sure`)
+    if (!confirm) {
+      if (!towerEvent.value.isCanceled) {
+        Pop.toast(`${towerEvent.value.name} is still on!`, `info`)
+      } else {
+        Pop.toast(`${towerEvent.value.name} is still canceled!`, 'info')
+      }
+      return
+    }
+    const towerEventId = route.params.eventId
+    towerEventsService.cancelTowerEvent(towerEventId)
+    if (!towerEvent.value.isCanceled) {
+      Pop.success(`${towerEvent.value.name} was successfully canceled`)
+    } else {
+      Pop.success(`${towerEvent.value.name} is back on!`)
+    }
+  } catch (error) {
+    Pop.error(error);
+  }
+}
 </script>
 
 
@@ -28,13 +51,29 @@ async function getTowerEventById() {
   <section class="container mt-5">
     <div v-if="towerEvent" class="row justify-content-between">
       <div class="col-12 text-center my-5 cover-img-bg rounded px-0">
-        <div class="blur-filter rounded-2">
+        <div class="blur-filter rounded-2 position-relative">
           <img class="img-fluid event-cover-img" :src="towerEvent.coverImg" :alt="`${towerEvent.coverImg}`">
+          <div class="canceled-tag position-absolute end-0 bottom-0">
+            <p v-if="towerEvent.isCanceled" class="px-5 fs-2 fw-semibold m-0">Canceled</p>
+          </div>
         </div>
       </div>
 
       <div class="col-8">
         <div class="row">
+          <div class="col-12 mt-2 text-end">
+            <button class="btn edit-event-btn fs-4 py-0 px-2" data-bs-toggle="dropdown">
+              <i class="mdi mdi-dots-horizontal"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <p @click="cancelTowerEvent()" class="dropdown-item selectable fw-semibold m-0 text-center">
+                  <span v-if="!towerEvent.isCanceled" class=" text-danger">Cancel Event</span>
+                  <span v-else class="text-success">Reopen Event</span>
+                </p>
+              </li>
+            </ul>
+          </div>
           <div class="col-12 mb-3">
             <div class="d-flex text-capitalize align-items-center">
               <h2 class="me-3">{{ towerEvent.name }}</h2>
@@ -134,5 +173,27 @@ async function getTowerEventById() {
 
 .blur-filter {
   backdrop-filter: blur(10px);
+}
+
+.edit-event-btn {
+  background-color: var(--bs-page);
+  border: none;
+}
+
+.edit-event-btn:hover {
+  background-color: #a8a8a856;
+  border: none;
+}
+
+.dropdown-item:active {
+  background-color: #7e7d7d56;
+}
+
+.canceled-tag {
+  border-top-left-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+  background-color: #d6293db4;
+  backdrop-filter: blur(25px);
+  color: var(--bs-text);
 }
 </style>

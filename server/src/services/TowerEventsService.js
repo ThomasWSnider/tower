@@ -38,10 +38,11 @@ class TowerEventsService {
 
   async cancelTowerEvent(towerEventId, userId) {
     const towerEventToCancel = await dbContext.TowerEvents.findById(towerEventId)
+    await towerEventToCancel.populate('creator')
     if (towerEventToCancel.creatorId != userId) throw new Forbidden('You may not delete an event you did not create')
     towerEventToCancel.isCanceled = !towerEventToCancel.isCanceled
     towerEventToCancel.save()
-    return `${towerEventToCancel} has been canceled`
+    return towerEventToCancel
   }
 }
 

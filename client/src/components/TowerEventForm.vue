@@ -44,9 +44,9 @@ function resetForm() {
 
 <template>
   <form @submit.prevent="createTowerEvent()" class="container-fluid">
-    <div class="row align-items-end">
+    <div class="row align-items-start">
       <label class="form-label">Image Preview</label>
-      <div class="col">
+      <div class="col d-flex d-lg-block justify-content-center">
         <div v-if="!editableTowerEventData.coverImg"
           class="bg-subtle rounded img-preview d-flex justify-content-center align-items-center">
           <i class="mdi mdi-image display-1"></i>
@@ -54,8 +54,17 @@ function resetForm() {
         <div v-else>
           <img class="rounded" :src="editableTowerEventData.coverImg" :alt="`${editableTowerEventData.coverImg}`">
         </div>
+        <!-- <div class="row d-lg-none">
+          <div class="col-12">
+            <div class="mb-3 mt-3">
+              <label for="description" class="form-label">Event Description</label>
+              <textarea v-model="editableTowerEventData.description" class="form-control" id="description" rows="3"
+                placeholder="Description" minlength="15" maxlength="1000" required></textarea>
+            </div>
+          </div>
+        </div> -->
       </div>
-      <div class="col-lg-7 col-4">
+      <div class="col-lg-7 col-12 mt-lg-0 mt-3">
 
         <div class="row">
           <div class="col-6 mb-3">
@@ -106,17 +115,14 @@ function resetForm() {
     </div>
     <div class="row">
       <div class="col-12">
-
         <div class="mb-3 mt-3">
           <label for="description" class="form-label">Event Description</label>
           <textarea v-model="editableTowerEventData.description" class="form-control" id="description" rows="3"
             placeholder="Description" minlength="15" maxlength="1000" required></textarea>
         </div>
-
       </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <div class="modal-footer mt-3">
       <button type="submit" class="btn btn-primary">Submit Event</button>
     </div>
 

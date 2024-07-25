@@ -5,7 +5,7 @@
 
 <template>
   <div class="modal fade" id="modal-wrapper" aria-labelledby="modal-wrapperLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+    <div class="modal-dialog modal-lg modal-fullscreen-sm-down">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="modal-wrapperLabel">Modal title</h1>
@@ -14,7 +14,6 @@
         <div class="modal-body">
           <slot></slot>
         </div>
-
       </div>
     </div>
   </div>

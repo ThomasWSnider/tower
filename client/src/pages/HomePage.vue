@@ -69,7 +69,7 @@ async function getTowerEvents() {
                     <p class="card-text">
                       Create your own Tower Event and invite your friends or draw from a community of millions
                     </p>
-                    <p data-bs-toggle="modal" data-bs-target="#exampleModal" class="fw-bold text-end event-button">
+                    <p data-bs-toggle="modal" data-bs-target="#modal-wrapper" class="fw-bold text-end event-button">
                       Create an Event</p>
                   </div>
                 </div>

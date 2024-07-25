@@ -5,7 +5,7 @@ import { Forbidden } from "../utils/Errors"
 class TowerEventsService {
 
   async createTowerEvent(towerEventData) {
-    const towerEvent = await dbContext.TowerEvents.create(towerEventData)
+    const towerEvent = (await dbContext.TowerEvents.create(towerEventData))
     await towerEvent.populate('creator ticketCount', '-email')
     return towerEvent
   }

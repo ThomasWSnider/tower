@@ -5,7 +5,7 @@ import { logger } from "../utils/Logger"
 class TicketsService {
 
   async getTicketsByAccountId(userId) {
-    const myTickets = await dbContext.Tickets.find({ accountId: userId }).populate({ path: 'event', populate: { path: 'creator' } })
+    const myTickets = await dbContext.Tickets.find({ accountId: userId }).populate({ path: 'event', populate: { path: 'creator ticketCount' } })
     return myTickets
   }
 

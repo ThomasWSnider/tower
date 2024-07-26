@@ -1,5 +1,5 @@
 import { AppState } from "../AppState"
-import { Ticket, TicketWithProfile } from "../models/Ticket"
+import { EventAttendee } from "../models/Ticket"
 import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 
@@ -8,14 +8,14 @@ class TicketsService {
 
   async createTicket(eventData) {
     const response = await api.post('api/tickets', eventData)
-    const newTicket = new Ticket(response.data)
+    const newTicket = new EventAttendee(response.data)
     AppState.eventAttendees.push(newTicket)
     AppState.activeTowerEvent.ticketCount++
   }
 
   async getEventAttendees(eventId) {
     const response = await api.get(`api/events/${eventId}/tickets`)
-    const eventAttendees = response.data.map((ticket) => new TicketWithProfile(ticket))
+    const eventAttendees = response.data.map((ticket) => new EventAttendee(ticket))
     AppState.eventAttendees = eventAttendees
   }
 }

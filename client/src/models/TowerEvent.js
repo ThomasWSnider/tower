@@ -20,6 +20,10 @@ export class TowerEvent {
     return `url(${this.coverImg})`
   }
 
+  get ticketsRemaining() {
+    return this.capacity - this.ticketCount
+  }
+
   // TODO work on getting the getter to only slice on a space
   // get truncatedDescription() {
   //   const body = this.description

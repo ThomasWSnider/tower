@@ -10,16 +10,16 @@ export class Ticket {
   }
 }
 
-export class TicketWithProfile extends Ticket {
+export class EventAttendee extends Ticket {
   constructor(data) {
     super(data)
-    this.profile = new Account(data)
+    this.profile = new Account(data.profile)
   }
 }
 
 export class TicketWithEvent extends Ticket {
   constructor(data) {
     super(data)
-    this.event = new TowerEvent(data)
+    this.event = new TowerEvent(data.event)
   }
 }

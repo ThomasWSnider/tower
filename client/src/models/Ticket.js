@@ -17,7 +17,7 @@ export class EventAttendee extends Ticket {
   }
 }
 
-export class TicketWithEvent extends Ticket {
+export class AccountTicket extends Ticket {
   constructor(data) {
     super(data)
     this.event = new TowerEvent(data.event)

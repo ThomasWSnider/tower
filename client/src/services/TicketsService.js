@@ -25,6 +25,12 @@ class TicketsService {
     const accountTickets = response.data.map((accountTicket) => new AccountTicket(accountTicket))
     AppState.accountTickets = accountTickets
   }
+
+  async deleteTicket(ticketId) {
+    const response = await api.delete(`api/tickets/${ticketId}`)
+    const ticketToDelete = AppState.accountTickets.findIndex((ticket) => ticket.id == ticketId)
+    AppState.accountTickets.splice(ticketToDelete, 1)
+  }
 }
 
 export const ticketsService = new TicketsService()

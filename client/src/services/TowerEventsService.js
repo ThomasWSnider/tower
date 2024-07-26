@@ -22,7 +22,6 @@ class TowerEventsService {
 
   async createTowerEvent(towerEventData) {
     const response = await api.post(`api/events`, towerEventData)
-    logger.log(response.data)
     const newTowerEvent = new TowerEvent(response.data)
     AppState.towerEvents.push(newTowerEvent)
     return newTowerEvent
@@ -30,7 +29,6 @@ class TowerEventsService {
 
   async cancelTowerEvent(towerEventId) {
     const response = await api.delete(`api/events/${towerEventId}`)
-    logger.log('canceled event', response.data)
     const canceledTowerEvent = new TowerEvent(response.data)
     AppState.activeTowerEvent = canceledTowerEvent
   }

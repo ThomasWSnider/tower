@@ -13,6 +13,7 @@ export class TowerEvent {
     this.isCanceled = data.isCanceled
     this.type = data.type
     this.creator = new Account(data.creator)
+    this.ticketCount = data.ticketCount
   }
 
   get backgroundImg() {

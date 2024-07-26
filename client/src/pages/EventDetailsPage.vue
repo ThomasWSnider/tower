@@ -10,15 +10,25 @@ import { ticketsService } from "../services/TicketsService";
 const account = computed(() => AppState.account)
 const towerEvent = computed(() => AppState.activeTowerEvent)
 const route = useRoute()
+const ticketsRemaining = computed(() => towerEvent.value.capacity - towerEvent.value.ticketCount)
 
 onMounted(() => {
   getTowerEventById()
+  getEventAttendees()
 })
 
 async function getTowerEventById() {
   try {
     const towerEventId = route.params.eventId
     await towerEventsService.getTowerEventById(towerEventId)
+  } catch (error) {
+    Pop.error(error);
+  }
+}
+
+async function getEventAttendees() {
+  try {
+    await ticketsService.getEventAttendees(route.params.eventId)
   } catch (error) {
     Pop.error(error);
   }
@@ -49,8 +59,8 @@ async function cancelTowerEvent() {
 
 async function createTicket() {
   try {
-    const accountId = account.value.id
-
+    const eventData = { eventId: route.params.eventId }
+    await ticketsService.createTicket(eventData)
   } catch (error) {
     Pop.error(error);
   }
@@ -141,11 +151,12 @@ async function createTicket() {
           </div>
           <div class="col-6 mb-2">
             <div class="d-grid">
-              <button class="btn btn-info">Attend</button>
+              <button :disabled="ticketsRemaining <= 0 || towerEvent.isCanceled" @click="createTicket()"
+                class="btn btn-info">Attend</button>
             </div>
           </div>
           <div class="col-12 text-center mb-5 mt-2">
-            <p class="text-subtle">0 tickets left, sorry!</p>
+            <p class="text-subtle">{{ ticketsRemaining }} tickets left!</p>
           </div>
           <div class="col-12">
             <div>

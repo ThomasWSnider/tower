@@ -8,6 +8,7 @@ export class CommentsController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createComment)
+      .delete('/:commentId', this.destroyComment)
   }
 
   async createComment(request, response, next) {
@@ -17,6 +18,17 @@ export class CommentsController extends BaseController {
       commentData.creatorId = userId
       const newComment = await commentsService.createComment(commentData)
       response.send(newComment)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async destroyComment(request, response, next) {
+    try {
+      const user = request.userInfo
+      const commentId = request.params.commentId
+      const message = await commentsService.destroyComment(user.id, commentId)
+      response.send(message)
     } catch (error) {
       next(error)
     }

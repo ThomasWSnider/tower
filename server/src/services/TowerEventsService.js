@@ -1,5 +1,5 @@
 import { dbContext } from "../db/DbContext"
-import { Forbidden } from "../utils/Errors"
+import { BadRequest, Forbidden } from "../utils/Errors"
 
 
 class TowerEventsService {
@@ -22,7 +22,10 @@ class TowerEventsService {
 
   async editTowerEvent(towerEventData, userId) {
     const towerEventToEdit = await dbContext.TowerEvents.findById(towerEventData.id)
+    console.log(towerEventToEdit.creatorId)
+    console.log(towerEventToEdit.creatorId, userId)
     if (towerEventToEdit.creatorId != userId) throw new Forbidden(`You cannot edit an event you did not create`)
+    if (towerEventToEdit.isCanceled) throw new BadRequest('You can not edit a canceled event')
     towerEventToEdit.creatorId = towerEventToEdit.creatorId
     towerEventToEdit.name = towerEventData.name || towerEventToEdit.name
     towerEventToEdit.description = towerEventData.description || towerEventToEdit.description

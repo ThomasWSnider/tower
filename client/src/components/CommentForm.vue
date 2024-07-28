@@ -32,8 +32,8 @@ function resetForm() {
 <template>
   <form @submit="createComment()" class="mb-3">
     <div class="form-floating mb-2">
-      <textarea v-model="editableCommentData.body" class="form-control" style="resize: none;"
-        placeholder="Leave a comment here..." id="comment" minlength="1" maxlength="500" required></textarea>
+      <input v-model="editableCommentData.body" class="form-control" style="resize: none;"
+        placeholder="Leave a comment here..." id="comment" minlength="1" maxlength="500" required>
       <label for="comment">Leave a comment here</label>
     </div>
     <div class="text-end">

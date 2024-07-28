@@ -115,7 +115,7 @@ async function createTicket() {
               <ul class="dropdown-menu">
                 <li>
                   <p @click="cancelTowerEvent()" class="dropdown-item selectable fw-semibold m-0 text-center">
-                    <span v-if="!towerEvent.isCanceled" class=" text-danger">Cancel Event</span>
+                    <span v-if="!towerEvent.isCanceled" class="text-danger">Cancel Event</span>
                     <span v-else class="text-success">Reopen Event</span>
                   </p>
                 </li>
@@ -136,7 +136,6 @@ async function createTicket() {
             <p><i class="mdi mdi-map-marker-alert-outline"></i> {{ towerEvent.location }}</p>
           </div>
         </div>
-        <!-- TODO Add Form functionality -->
         <div class="col-12 mt-5 mb-2">
           <h4>See what others are saying...</h4>
           <div class="row justify-content-center">
@@ -156,7 +155,7 @@ async function createTicket() {
         <div class="col-12">
           <div class="row justify-content-center">
             <div v-for="comment in eventComments" :key="comment.id" class="col-10">
-              <CommentCard :comment="comment" />
+              <CommentCard :comment="comment" :account="account" />
             </div>
           </div>
         </div>

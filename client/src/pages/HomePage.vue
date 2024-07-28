@@ -35,9 +35,12 @@ async function getTowerEvents() {
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 p-0">
-        <img class="img-fluid landing-img"
+        <img class="img-fluid landing-img d-none d-sm-block"
           src="https://images.unsplash.com/photo-1518709368567-b22d4217b91f?q=80&w=1450&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="A tower of giraffes">
+        <img class="d-sm-none img-fluid landing-img"
+          src="https://images.unsplash.com/photo-1635983297009-5b540eaf368d?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="A tower of Giraffes">
       </div>
     </div>
   </div>

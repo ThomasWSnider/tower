@@ -37,7 +37,9 @@ function resetForm() {
       <label for="comment">Leave a comment here</label>
     </div>
     <div class="text-end">
-      <button type="submit" class="btn btn-success">Post Comment</button>
+      <div class="d-grid d-sm-block">
+        <button type="submit" class="btn btn-success">Post Comment</button>
+      </div>
     </div>
   </form>
 </template>

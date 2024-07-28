@@ -83,9 +83,9 @@ async function createTicket() {
 
 
 <template>
-  <section class="container mt-5">
+  <section class="container-md mt-md-5">
     <div v-if="towerEvent" class="row justify-content-between">
-      <div class="col-12 text-center my-5 cover-img-bg rounded px-0">
+      <div class="col-12 text-center mb-5 mt-md-5 mt-sm-2 cover-img-bg rounded px-0">
         <div class="blur-filter rounded-2 position-relative">
           <img class="img-fluid event-cover-img" :src="towerEvent.coverImg" :alt="`${towerEvent.coverImg}`">
           <div v-if="towerEvent.isCanceled" class="canceled-tag position-absolute end-0 bottom-0">
@@ -97,7 +97,7 @@ async function createTicket() {
         </div>
       </div>
 
-      <div class="col-8">
+      <div class="col-md-8 order-1 order-md-2">
         <div class="row">
           <div class="col-6 mb-3">
             <div class="d-flex text-capitalize align-items-center">
@@ -141,27 +141,20 @@ async function createTicket() {
           <div class="row justify-content-center">
             <div class="col-12">
               <p class="fs-6 fw-bold text-end text-success">Join the conversation</p>
-
               <CommentForm />
-
-            </div>
-            <div class="col-10 justify-content-center">
-              <div class="text-center">
-
-              </div>
             </div>
           </div>
         </div>
         <div class="col-12">
           <div class="row justify-content-center">
-            <div v-for="comment in eventComments" :key="comment.id" class="col-10">
+            <div v-for="comment in eventComments" :key="comment.id" class="col-12 col-sm-10">
               <CommentCard :comment="comment" :account="account" />
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-3 mt-5">
+      <div class="col-md-3 order-1 order-md-2 mt-5">
         <div class="row justify-content-center">
           <div class="col-12 text-center mt-3">
             <p class="fs-4">Interested in going?</p>
@@ -183,20 +176,42 @@ async function createTicket() {
               tickets to this event
             </small>
           </div>
-          <div class="col-12">
+          <div class="col-12 mb-5">
             <div>
               <h3>Attendees</h3>
             </div>
             <hr>
             <div class="row">
-              <div v-for="attendee in attendees.slice(0, 20)" :key="attendee.id" class="col-3 text-center px-0 mb-1">
+              <div v-for="attendee in attendees.slice(0, 20)" :key="attendee.id"
+                class="col-3 text-center px-0 mb-1 d-none d-lg-block">
+                <img class="img-fluid attendee-card" :src="attendee.profile.picture" :alt="attendee.profile.name"
+                  :title="attendee.profile.name">
+              </div>
+              <div v-for="attendee in attendees.slice(0, 15)" :key="attendee.id"
+                class="col-4 text-center px-0 mb-1 d-none d-md-block d-lg-none">
+                <img class="img-fluid attendee-card" :src="attendee.profile.picture" :alt="attendee.profile.name"
+                  :title="attendee.profile.name">
+              </div>
+              <div v-for="attendee in attendees.slice(0, 32)" :key="attendee.id"
+                class="col-3 text-center px-0 mb-1 d-md-none">
                 <img class="img-fluid attendee-card" :src="attendee.profile.picture" :alt="attendee.profile.name"
                   :title="attendee.profile.name">
               </div>
               <div class="col-12 text-end">
-                <small class="selectable text-subtle" role="button" data-bs-toggle="modal"
-                  data-bs-target="#modal-wrapper">And {{ attendees.length - 20
-                  }} more...</small>
+                <small class="selectable text-subtle d-none d-lg-block" role="button" data-bs-toggle="modal"
+                  data-bs-target="#modal-wrapper">
+                  {{ attendees.length <= 20 ? "" : `And ${attendees.length - 20} More...` }} </small>
+
+
+                    <small class="selectable text-subtle d-none d-md-block d-lg-none" role="button"
+                      data-bs-toggle="modal" data-bs-target="#modal-wrapper">
+                      {{ attendees.length <= 15 ? "" : `And ${attendees.length - 15} More ...` }} </small>
+
+
+                        <small class="selectable text-subtle d-md-none" role="button" data-bs-toggle="modal"
+                          data-bs-target="#modal-wrapper">
+                          {{ attendees.length <= 32 ? "" : `And ${attendees.length - 32} More ...` }} </small>
+
               </div>
             </div>
           </div>

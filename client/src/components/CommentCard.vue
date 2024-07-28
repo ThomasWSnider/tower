@@ -37,7 +37,12 @@ async function destroyComment(commentId) {
     </div>
     <div class="row g-0 justify-content-between">
       <div class="col-2">
-        <img :src="comment.creator.picture" class="img-fluid rounded-start" :alt="comment.creator.picture">
+        <img :src="comment.creator.picture" class="img-fluid comment-card-img" :alt="comment.creator.picture">
+      </div>
+      <div class="col-10 d-flex align-items-center">
+        <p class="fs-5 ms-3 mb-0 text-capitalize d-flex">
+          {{ comment.creator.name }}
+        </p>
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -61,5 +66,10 @@ async function destroyComment(commentId) {
 
 .dropdown-item:active {
   background-color: #7e7d7d56;
+}
+
+.comment-card-img {
+  border-bottom-right-radius: 25%;
+  border-top-left-radius: 0.375rem;
 }
 </style>

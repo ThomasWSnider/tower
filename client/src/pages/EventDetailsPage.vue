@@ -7,15 +7,20 @@ import { towerEventsService } from "../services/TowerEventsService";
 import { ticketsService } from "../services/TicketsService";
 import ModalWrapper from "../components/ModalWrapper.vue";
 import EventAttendeeCard from "../components/EventAttendeeCard.vue";
+import CommentForm from "../components/CommentForm.vue";
+import CommentCard from "../components/CommentCard.vue";
+import { commentsService } from "../services/CommentsService";
 
 const account = computed(() => AppState.account)
 const towerEvent = computed(() => AppState.activeTowerEvent)
 const attendees = computed(() => AppState.eventAttendees)
+const eventComments = computed(() => AppState.eventComments)
 const route = useRoute()
 
 onMounted(() => {
   getTowerEventById()
   getEventAttendees()
+  getEventComments()
 })
 
 async function getTowerEventById() {
@@ -32,6 +37,14 @@ async function getEventAttendees() {
     await ticketsService.getEventAttendees(route.params.eventId)
   } catch (error) {
     Pop.error(error);
+  }
+}
+
+async function getEventComments() {
+  try {
+    await commentsService.getEventComments(route.params.eventId)
+  } catch (error) {
+    Pop.toast(`Could not retrieve comments for ${towerEvent.value.name}`, 'error')
   }
 }
 
@@ -129,21 +142,21 @@ async function createTicket() {
           <div class="row justify-content-center">
             <div class="col-12">
               <p class="fs-6 fw-bold text-end text-success">Join the conversation</p>
-              <form class="mb-3">
-                <div class="form-floating mb-2">
-                  <textarea class="form-control" style="resize: none;" placeholder="Leave a comment here..."
-                    id="comment"></textarea>
-                  <label for="comment">Leave a comment here</label>
-                </div>
-                <div class="text-end">
-                  <button type="button" class="btn btn-success">Post Comment</button>
-                </div>
-              </form>
+
+              <CommentForm />
+
             </div>
             <div class="col-10 justify-content-center">
               <div class="text-center">
-                **Comment Cards Here**
+
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row justify-content-center">
+            <div v-for="comment in eventComments" :key="comment.id" class="col-10">
+              <CommentCard :comment="comment" />
             </div>
           </div>
         </div>

@@ -227,7 +227,7 @@ async function createTicket() {
         </div>
       </div>
     </div>
-  </ModalWrapper> />
+  </ModalWrapper>
 </template>
 
 

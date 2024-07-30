@@ -49,7 +49,8 @@ async function destroyComment(commentId) {
           <p class="card-text">
             {{ comment.body }}
           </p>
-          <p class="card-text"><small class="text-body-secondary">Commented on {{ comment.createdAt }}</small></p>
+          <p class="card-text"><small class="text-body-secondary">Commented on {{ comment.createdAt.toDateString()
+              }}</small></p>
         </div>
       </div>
     </div>

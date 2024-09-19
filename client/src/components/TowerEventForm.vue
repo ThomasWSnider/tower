@@ -46,7 +46,7 @@ function resetForm() {
   <form @submit.prevent="createTowerEvent()" class="container-fluid">
     <div class="row align-items-start">
       <label class="form-label">Image Preview</label>
-      <div class="col d-flex d-lg-block justify-content-center">
+      <div class="col d-flex justify-content-center">
         <div v-if="!editableTowerEventData.coverImg"
           class="bg-subtle rounded img-preview d-flex justify-content-center align-items-center">
           <i class="mdi mdi-image display-1"></i>
@@ -54,15 +54,6 @@ function resetForm() {
         <div v-else>
           <img class="rounded" :src="editableTowerEventData.coverImg" :alt="`${editableTowerEventData.coverImg}`">
         </div>
-        <!-- <div class="row d-lg-none">
-          <div class="col-12">
-            <div class="mb-3 mt-3">
-              <label for="description" class="form-label">Event Description</label>
-              <textarea v-model="editableTowerEventData.description" class="form-control" id="description" rows="3"
-                placeholder="Description" minlength="15" maxlength="1000" required></textarea>
-            </div>
-          </div>
-        </div> -->
       </div>
       <div class="col-lg-7 col-12 mt-lg-0 mt-3">
 
